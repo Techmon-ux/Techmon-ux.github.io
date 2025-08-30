@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Olagunju David Afolarin — Portfolio</title>
+  <meta name="description" content="Olagunju David Afolarin — Web Developer • Forex Trader • Business & Cooperative Development" />
+  <style>
+    /* ---------- Root + Reset ---------- */
+    :root{
+      --purple-1: #6a11cb;
+      --purple-2: #4b0082;
+      --accent: #d08aff;
+      --glass: rgba(0,0,0,0.72);
+      --glass-2: rgba(255,255,255,0.04);
+      --btn: linear-gradient(90deg,var(--purple-1),#2575fc);
+      --maxw: 1100px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #fff;
+      line-height:1.6;
+      background: url('https://source.unsplash.com/1920x1280/?technology,abstract') center/cover no-repeat fixed;
+    }
+    /* blurry overlay so background stays pretty but out of focus */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      backdrop-filter: blur(8px) saturate(1.05);
+      -webkit-backdrop-filter: blur(8px) saturate(1.05);
+      z-index:-1;
+    }
+
+    /* ---------- Header (purple gradient) ---------- */
+    header.site-header{
+      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+      padding:64px 20px;
+      text-align:center;
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    header h1{
+      font-size:2.4rem;
+      letter-spacing:0.6px;
+      margin-bottom:6px;
+    }
+    header p.lead{
+      color:rgba(255,255,255,0.92);
+      opacity:0.95;
+      margin-bottom:12px;
+      font-size:1.05rem;
+    }
+    /* nav */
+    nav.top-nav{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+    nav.top-nav a{
+      color:rgba(255,255,255,0.95);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600;
+      transition:transform .14s ease, background .14s ease;
+    }
+    nav.top-nav a:hover{ transform:translateY(-3px); background:rgba(255,255,255,0.06) }
+
+    /* stick nav on scroll (small shadow) */
+    .sticky {
+      position: sticky; top:0; z-index: 30; box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+    }
+
+    /* ---------- Sections ---------- */
+    section{
+      margin:30px auto;
+      background: var(--glass);
+      border-radius:12px;
+      padding:44px 20px;
+      width: min(96%, var(--maxw));
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    }
+    h2{
+      color: var(--accent);
+      text-align:center;
+      margin-bottom:18px;
+      font-size:1.4rem;
+    }
+    p.lead-2{ max-width:920px; margin:0 auto 10px; text-align:center; color: #f3e9ff; opacity:0.95 }
+
+    /* profile picture */
+    .profile-wrap{ display:flex; gap:20px; align-items:center; justify-content:center; flex-wrap:wrap }
+    #profileImg{
+      width:150px; height:150px; border-radius:999px; object-fit:cover;
+      border:4px solid var(--accent);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      background:var(--glass-2);
+    }
+    .profile-meta{ max-width:640px; text-align:left; color:#fff; }
+    .profile-meta h3{ margin-bottom:6px; font-size:1.2rem; color:#fff }
+    .profile-meta p{ color: #eee; opacity:0.95 }
+
+    /* two-column layout */
+    .two-col{ display:grid; grid-template-columns: 1fr 1fr; gap:28px; align-items:start }
+    @media (max-width:900px){ .two-col{ grid-template-columns: 1fr } }
+
+    /* skills + services list */
+    ul.clean{ list-style:none; padding:0; display:grid; gap:10px; justify-items:center }
+    ul.clean li{ background:var(--glass-2); padding:12px 16px; border-radius:10px; width:100%; text-align:center; color:#fff; font-weight:600 }
+
+    /* portfolio grid */
+    .portfolio-grid{ display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); margin-top:14px }
+    .portfolio-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08));
+      border-radius:10px; overflow:hidden; text-align:left;
+      transition: transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.45);
+    }
+    .portfolio-card:hover{ transform: translateY(-6px); box-shadow:0 18px 60px rgba(0,0,0,0.6) }
+    .portfolio-card img{ width:100%; height:160px; object-fit:cover; display:block }
+    .portfolio-card .body{ padding:14px }
+    .portfolio-card h4{ margin:0 0 8px; color:#fff }
+    .portfolio-card p{ margin:0; color: #e7deff; opacity:0.92; font-size:0.95rem }
+
+    /* testimonials */
+    .testimonial{ background: rgba(255,255,255,0.03); padding:18px; border-left:4px solid var(--accent); border-radius:8px; margin:12px auto; max-width:900px; font-style:italic }
+
+    /* contact buttons */
+    .btns { text-align:center; margin-top:8px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:12px 18px; border-radius:10px; text-decoration:none; color:#fff; font-weight:700;
+      background:var(--btn); box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+    .btn.secondary{ background: rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.06) }
+    .btn:active{ transform: translateY(1px) }
+
+    /* footer */
+    footer{ text-align:center; padding:20px; margin-top:18px; border-radius:8px; background: linear-gradient(135deg,var(--purple-2),var(--purple-1)) }
+
+    /* misc */
+    small.muted{ color: rgba(255,255,255,0.7) }
+    /* smooth scroll behavior */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <h1>Olagunju David Afolarin</h1>
+      <p class="lead">Turning ideas into digital reality — Web dev, forex strategy & business growth</p>
+
+      <nav class="top-nav sticky" aria-label="Primary navigation">
+        <a href="#profile">Profile</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PROFILE -->
+  <section id="profile" aria-labelledby="profileHeading">
+    <div class="profile-wrap container">
+      <!-- default profile image; to replace: upload your image in repo and set the src to the raw URL -->
+      <img id="profileImg" src="https://via.placeholder.com/300.png?text=Profile+Image" alt="Profile picture — Olagunju David Afolarin" />
+      <div class="profile-meta">
+        <h3>Hello — I’m David</h3>
+        <p>I build clean, fast websites and teach traders how to think in systems. I combine web design, market analysis and practical business sense from cooperative development studies to help small businesses and creators scale online. This portfolio is my window — welcome.</p>
+        <p class="small muted" style="margin-top:10px">Based in Nigeria • Student @ OOU • Available for hire</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p class="lead-2">I’m a student and self-taught front-end developer who loves turning simple ideas into useful products. I also trade the market — day trading with discipline, journaling, and continuous learning. My studies in cooperative & rural development give me perspective on practical solutions for people and small businesses.</p>
+
+    <div style="margin-top:20px; display:flex; justify-content:center">
+      <div style="max-width:900px; color:#fff; opacity:0.95; text-align:left">
+        <p>I’m building a portfolio that combines my hobbies and growth areas: crisp websites for small sellers, clear brand visuals, and practical market tutoring. I prefer simple, fast websites that convert — mobile-first, accessible, and polished.</p>
+        <p style="margin-top:8px">If you want a landing page, a small business site, or guidance on starting in forex, I’m available for paid work and mentorships.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div style="max-width:880px;margin:0 auto">
+      <div class="two-col">
+        <div>
+          <ul class="clean">
+            <li>Front-End Web Design (HTML, CSS, responsive layouts)</li>
+            <li>UI / Visual Design & Branding</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="clean">
+            <li>Forex Trading — Day trading & market analysis</li>
+            <li>Business & Cooperative Development (practical strategy)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h2>Services</h2>
+    <div style="max-width:980px;margin:0 auto">
+      <div class="two-col">
+        <div>
+          <h3 style="color:#fff;margin-bottom:12px">Web & Branding</h3>
+          <p style="color:#e7deff">Landing pages, portfolio sites, logo & brand identity, mobile-first responsive builds that load fast and look sharp.</p>
+        </div>
+        <div>
+          <h3 style="color:#fff;margin-bottom:12px">Forex & Business Help</h3>
+          <p style="color:#e7deff">Mentorship sessions, trade-plan reviews, simple dashboards, and business advice for cooperatives and small ventures.</p>
+        </div>
+      </div>
+      <div style="margin-top:18px; text-align:center">
+        <a class="btn" href="mailto:daidgold33@gmail.com">📧 Hire / Enquire via Email</a>
+        <a class="btn secondary" href="https://wa.me/19382164813" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <h2>Portfolio Showcase</h2>
+    <p class="lead-2">Concepts, mockups and client-ready templates — screenshots below are placeholders you can replace anytime.</p>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/800x450?text=Website+Design+Concept" alt="Website Design Concept">
+        <div class="body">
+          <h4>Website Design Concept</h4>
+          <p>Modern landing page design for small businesses — focus on conversion and clarity.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/800x450?text=Forex+Dashboard+Mockup" alt="Forex Dashboard Mockup">
+        <div class="body">
+          <h4>Forex Dashboard Mockup</h4>
+          <p>Clean layout for tracking trades, P/L and watchlists — made for clarity in decisions.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/800x450?text=Branding+and+Logo" alt="Branding and Logo">
+        <div class="body">
+          <h4>Branding & Logo</h4>
+          <p>Simple brand identity systems for small businesses and solopreneurs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <h2>What People Say</h2>
+    <div class="testimonial">“David turned our basic idea into a clean website that actually brought customers. Fast and professional.” — Local bakery</div>
+    <div class="testimonial">“He explains trading ideas simply and keeps you accountable. Solid mentorship.” — Student trader</div>
+    <div class="testimonial">“Reliable, creative, and solution-focused.” — Classmate</div>
+  </section>
+
+  <!-- MOTTO -->
+  <section id="motto">
+    <h2>My Motto</h2>
+    <p class="quote" style="text-align:center; color:#ffda79">“Building ideas, growing people, and creating opportunities through tech and knowledge.”</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p style="text-align:center; color:#fff; opacity:0.95">Ready to work, collaborate, or ask a question? Reach out directly.</p>
+    <div class="btns">
+      <a class="btn" href="mailto:daidgold33@gmail.com">📧 Email</a>
+      <a class="btn" href="https://wa.me/19382164813" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="btn" href="https://instagram.com/olagunjudavidafolarin" target="_blank" rel="noopener">📸 Instagram</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Olagunju David Afolarin — Built with 💜 on GitHub Pages</small>
+    </div>
+  </footer>
+
+  <script>
+    // dynamic year — tiny script only for year (safe and tiny)
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
